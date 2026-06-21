@@ -1,8 +1,9 @@
 {
   "appId": "com.stitchlab.app",
   "appName": "StitchLab",
-  "webDir": "build",
+  "webDir": "www",
   "server": {
-    "androidScheme": "https"
+    "url": "https://stitchlab2.vercel.app/",
+    "cleartext": true
   }
 }
