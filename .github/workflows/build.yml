@@ -20,14 +20,20 @@ jobs:
 
       - name: Setup Icon and Signing
         run: |
+          # إنشاء المجلدات المطلوبة للأيقونة
           mkdir -p android/app/src/main/res/mipmap-xxxhdpi/
+          
+          # نسخ الصورة لمكانها الصحيح كأيقونة
           cp logo.png android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
-          # إنشاء توقيع تلقائي ليقبل المتجر التطبيق
+          
+          # إنشاء توقيع تلقائي (Keystore)
           keytool -genkeypair -v -keystore android/app/debug.keystore -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -storepass android -keypass android -dname "CN=Android Debug,O=Android,C=US"
 
       - name: Build APK
         run: |
           cd android
+          # إعطاء صلاحية تنفيذ لملف البناء
+          chmod +x gradlew
           ./gradlew assembleDebug
 
       - name: Upload APK
