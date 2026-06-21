@@ -9,9 +9,11 @@ jobs:
         with:
           node-version: '20'
       - run: npm install
-      # إضافة خطوة لإنشاء مجلد فارغ ينهي الخطأ
       - run: mkdir -p www && touch www/index.html
       - run: npx cap add android || true
+      # هنا قمنا بإضافة سطر الأذونات للميكروفون والكاميرا والإنترنت
+      - run: |
+          sed -i '/<\/manifest>/i \    <uses-permission android:name="android.permission.INTERNET" />\n    <uses-permission android:name="android.permission.RECORD_AUDIO" />\n    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />\n    <uses-permission android:name="android.permission.CAMERA" />' android/app/src/main/AndroidManifest.xml
       - run: npx cap sync android
       - name: Build APK
         run: cd android && ./gradlew assembleDebug
