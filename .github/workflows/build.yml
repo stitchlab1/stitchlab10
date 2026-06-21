@@ -10,34 +10,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
 
       - name: Setup Icon and Signing
         run: |
-          # إنشاء المجلدات المطلوبة للأيقونة
           mkdir -p android/app/src/main/res/mipmap-xxxhdpi/
-          
-          # نسخ الصورة لمكانها الصحيح كأيقونة
           cp logo.png android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
-          
-          # إنشاء توقيع تلقائي (Keystore)
           keytool -genkeypair -v -keystore android/app/debug.keystore -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -storepass android -keypass android -dname "CN=Android Debug,O=Android,C=US"
 
       - name: Build APK
         run: |
           cd android
-          # إعطاء صلاحية تنفيذ لملف البناء
           chmod +x gradlew
           ./gradlew assembleDebug
 
       - name: Upload APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: app-debug
           path: android/app/build/outputs/apk/debug/app-debug.apk
