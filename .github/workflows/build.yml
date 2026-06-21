@@ -9,7 +9,8 @@ jobs:
         with:
           node-version: '20'
       - run: npm install
-      # حذفنا خطوة "run npm run build" لأننا لا نحتاجها
+      # إضافة خطوة لإنشاء مجلد فارغ ينهي الخطأ
+      - run: mkdir -p www && touch www/index.html
       - run: npx cap add android || true
       - run: npx cap sync android
       - name: Build APK
@@ -19,4 +20,3 @@ jobs:
         with:
           name: app-debug
           path: android/app/build/outputs/apk/debug/app-debug.apk
-          
