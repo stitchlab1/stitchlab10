@@ -1,0 +1,8 @@
+{
+  "appId": "com.stitchlab.app",
+  "appName": "StitchLab",
+  "webDir": "build",
+  "server": {
+    "androidScheme": "https"
+  }
+}
