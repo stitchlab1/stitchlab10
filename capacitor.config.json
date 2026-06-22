@@ -1,9 +1,0 @@
-{
-  "appId": "com.stitchlab.app",
-  "appName": "StitchLab",
-  "webDir": "www",
-  "server": {
-    "url": "https://stitchlab2.vercel.app/",
-    "cleartext": true
-  }
-}
